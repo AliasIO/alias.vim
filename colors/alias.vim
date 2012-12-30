@@ -274,7 +274,7 @@ let s:colors = {
 let s:comment     = { "fg":  "240", "bg": "NONE" }
 let s:constant    = { "fg":  "135", "bg": "NONE" }
 let s:function    = { "fg":  "198", "bg": "NONE" }
-let s:identifier  = { "fg":   "80", "bg": "NONE" }
+let s:identifier  = { "fg":   "81", "bg": "NONE" }
 let s:keyword     = { "fg":  "255", "bg": "NONE" }
 let s:number      = { "fg":  "220", "bg": "NONE" }
 let s:preproc     = { "fg":  "190", "bg": "NONE" }
@@ -283,14 +283,21 @@ let s:special     = { "fg":  "214", "bg": "NONE" }
 let s:string      = { "fg":  "228", "bg": "NONE" }
 let s:type        = { "fg":  "177", "bg": "NONE" }
 
+let s:diffadd     = { "fg": "NONE", "bg":  "234" }
+let s:diffchange  = { "fg": "NONE", "bg":  "233" }
+let s:difftext    = { "fg": "NONE", "bg":  "233" }
+let s:diffdelete  = { "fg":   "52", "bg": "NONE" }
+
 let s:cursor      = { "fg":   "00", "bg":   "15" }
 let s:cursorline  = { "fg": "NONE", "bg":  "232" }
-let s:linenr      = { "fg":  "236", "bg":  "232" }
+let s:linenr      = { "fg":  "237", "bg":  "232" }
 let s:normal      = { "fg":  "255", "bg":  "233" }
 let s:nontext     = { "fg":  "236", "bg": "NONE" }
 let s:search      = { "fg":   "00", "bg":  "220" }
-let s:tablinefill = { "fg":  "255", "bg": "NONE" }
-let s:visual      = { "fg": "NONE", "bg":   "00" }
+let s:tabline     = { "fg":  "245", "bg": "NONE" }
+let s:tablinefill = { "fg":  "245", "bg": "NONE" }
+let s:tablinesel  = { "fg":  "220", "bg": "NONE" }
+let s:visual      = { "fg":   "00", "bg":  "220" }
 let s:warning     = { "fg":  "196", "bg":   "15" }
 
 function! s:h(group, colors, style)
@@ -313,82 +320,43 @@ call s:h("special",      s:special,     "NONE")
 call s:h("string",       s:string,      "NONE")
 call s:h("type",         s:type,        "NONE")
 
+"Diff
+call s:h("diffadd",      s:diffadd,     "NONE")
+call s:h("diffchange",   s:normal,      "NONE")
+call s:h("difftext",     s:normal,      "NONE")
+call s:h("diffdelete",   s:diffdelete,  "NONE")
+
 "User interface
 call s:h("tablinefill",  s:tablinefill, "NONE")
 call s:h("cursor",       s:cursor,      "NONE")
-call s:h("folded",       s:normal,      "NONE")
+call s:h("foldcolumn",   s:linenr,      "NONE")
+call s:h("folded",       s:linenr,      "NONE")
 call s:h("incsearch",    s:search,      "NONE")
 call s:h("linenr",       s:linenr,      "NONE")
 call s:h("nontext",      s:nontext,     "NONE")
 call s:h("normal",       s:normal,      "NONE")
-call s:h("pmenu",        s:normal,      "NONE")
-call s:h("pmenusel",     s:normal,      "NONE")
+call s:h("pmenu",        s:tabline,     "NONE")
+call s:h("pmenusel",     s:tablinesel,  "NONE")
 call s:h("search",       s:search,      "NONE")
 call s:h("specialkey",   s:nontext,     "NONE")
-call s:h("statusline",   s:normal,      "NONE")
-call s:h("statuslinenc", s:normal,      "NONE")
-call s:h("tabline",      s:normal,      "NONE")
-call s:h("tablinesel",   s:normal,      "NONE")
-call s:h("tablinefill",  s:normal,      "NONE")
+call s:h("statusline",   s:tabline,     "NONE")
+call s:h("statuslinenc", s:tabline,     "italic")
+call s:h("tabline",      s:tabline,     "NONE")
+call s:h("tablinesel",   s:tablinesel,  "NONE")
+call s:h("tablinefill",  s:tablinefill, "NONE")
 call s:h("treeclosable", s:normal,      "NONE")
 call s:h("treedir",      s:constant,    "NONE")
 call s:h("treedirslash", s:normal,      "NONE")
 call s:h("treefile",     s:normal,      "NONE")
-call s:h("treehelp",     s:normal,      "NONE")
+call s:h("treehelp",     s:tabline,     "NONE")
 call s:h("treeopenable", s:type,        "NONE")
 call s:h("treepartfile", s:normal,      "NONE")
 call s:h("treero",       s:normal,      "NONE")
-call s:h("treeup",       s:normal,      "NONE")
+call s:h("treeup",       s:tabline,     "NONE")
 call s:h("title",        s:normal,      "NONE")
 call s:h("underlined",   s:normal,      "NONE")
 call s:h("vertsplit",    s:nontext,     "NONE")
 call s:h("visual",       s:visual,      "NONE")
 call s:h("visualnos",    s:visual,      "NONE")
 call s:h("warningmsg",   s:warning,     "NONE")
-call s:h("wildmenu",     s:normal,      "NONE")
-
-"hi cursor           guifg=#000000 guibg=#ffffff gui=NONE      ctermfg=NONE     ctermbg=NONE     cterm=NONE
-"hi folded           guifg=#ffffff guibg=#222222 gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi incsearch        guifg=#000000 guibg=#f2ac00 gui=NONE      ctermfg=Black    ctermbg=Yellow   cterm=NONE
-"hi linenr           guifg=#363330 guibg=#060300 gui=NONE      ctermfg=Magenta  ctermbg=NONE     cterm=NONE
-"hi nontext          guifg=#363330 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi normal           guifg=#eeeeee guibg=#161310 gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi pmenu            guifg=#545e62 guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi pmenusel         guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi search           guifg=#000000 guibg=#f2ac00 gui=NONE      ctermfg=Black    ctermbg=Yellow   cterm=NONE
-"hi specialkey       guifg=#363330 guibg=NONE    gui=NONE      ctermfg=Black    ctermbg=NONE     cterm=NONE
-"hi statusline       guifg=#545e62 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi statuslinenc     guifg=#333333 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi tabline          guifg=#545e62 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi tablinesel       guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi tablinefill      guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi treeclosable     guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi treedir          guifg=#ceff00 guibg=NONE    gui=NONE      ctermfg=Green    ctermbg=NONE     cterm=NONE
-"hi treedirslash     guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi treefile         guifg=#f92b75 guibg=NONE    gui=NONE      ctermfg=Red      ctermbg=NONE     cterm=NONE
-"hi treehelp         guifg=#545e62 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi treeopenable     guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi treepartfile     guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi treero           guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi treeup           guifg=#545e62 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi title            guifg=#ffffff guibg=NONE    gui=bold      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi underlined       guifg=#ffffff guibg=NONE    gui=underline ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi vertsplit        guifg=#333333 guibg=NONE    gui=NONE      ctermfg=Grey     ctermbg=NONE     cterm=NONE
-"hi visual           guifg=NONE    guibg=#22282a gui=NONE      ctermfg=Black    ctermbg=Grey     cterm=NONE
-"hi visualnos        guifg=NONE    guibg=#22282a gui=NONE      ctermfg=Black    ctermbg=Grey     cterm=NONE
-"hi warningmsg       guifg=#f92b75 guibg=NONE    gui=NONE      ctermfg=Red      ctermbg=NONE     cterm=NONE
-"hi wildmenu         guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-
-"Syntax highlighting
-"hi comment          guifg=#545e62 guibg=NONE    gui=NONE      ctermfg=Magenta  ctermbg=NONE     cterm=NONE
-"hi constant         guifg=#a082bc guibg=NONE    gui=bold      ctermfg=Magenta  ctermbg=NONE     cterm=NONE
-"hi function         guifg=#f92b75 guibg=NONE    gui=NONE      ctermfg=Red      ctermbg=NONE     cterm=NONE
-"hi identifier       guifg=#77eefe guibg=NONE    gui=NONE      ctermfg=Cyan     ctermbg=NONE     cterm=NONE
-"hi keyword          guifg=#eeeeee guibg=NONE    gui=bold      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi number           guifg=#f7ca1e guibg=NONE    gui=NONE      ctermfg=Yellow   ctermbg=NONE     cterm=NONE
-"hi preproc          guifg=#ceff00 guibg=NONE    gui=NONE      ctermfg=Green    ctermbg=NONE     cterm=NONE
-"hi statement        guifg=#eeeeee guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi special          guifg=#f2ac00 guibg=NONE    gui=NONE      ctermfg=Yellow   ctermbg=NONE     cterm=NONE
-"hi string           guifg=#e8d876 guibg=NONE    gui=NONE      ctermfg=Yellow   ctermbg=NONE     cterm=NONE
-"hi tablinefill      guifg=#ffffff guibg=NONE    gui=NONE      ctermfg=White    ctermbg=NONE     cterm=NONE
-"hi type             guifg=#a082bc guibg=NONE    gui=NONE      ctermfg=Magenta  ctermbg=NONE     cterm=NONE
+call s:h("wildmenu",     s:tablinesel,  "NONE")
