@@ -298,7 +298,7 @@ let s:tabline     = { "fg":  "245", "bg": "NONE" }
 let s:tablinefill = { "fg":  "245", "bg": "NONE" }
 let s:tablinesel  = { "fg":  "220", "bg": "NONE" }
 let s:visual      = { "fg":   "00", "bg":  "220" }
-let s:warning     = { "fg":  "196", "bg":   "15" }
+let s:warning     = { "fg":  "196", "bg": "NONE" }
 
 function! s:h(group, colors, style)
 	execute "highlight" a:group "guifg=" s:colors[a:colors.fg] "guibg=" s:colors[a:colors.bg] "gui=" a:style "ctermfg=" a:colors.fg "ctermbg=" a:colors.bg "cterm=" a:style
