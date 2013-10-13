@@ -271,93 +271,95 @@ let s:colors = {
 	\ "NONE": "NONE"
 	\ }
 
-let s:comment     = { "fg":  "240", "bg": "NONE" }
-let s:constant    = { "fg":  "135", "bg": "NONE" }
-let s:function    = { "fg":  "198", "bg": "NONE" }
-let s:identifier  = { "fg":   "81", "bg": "NONE" }
-let s:keyword     = { "fg":  "255", "bg": "NONE" }
-let s:number      = { "fg":  "220", "bg": "NONE" }
-let s:preproc     = { "fg":  "190", "bg": "NONE" }
-let s:statement   = { "fg":  "255", "bg": "NONE" }
-let s:special     = { "fg":  "214", "bg": "NONE" }
-let s:string      = { "fg":  "228", "bg": "NONE" }
-let s:type        = { "fg":  "177", "bg": "NONE" }
+let s:comment      = { "fg":  "240", "bg": "NONE" }
+let s:constant     = { "fg":  "135", "bg": "NONE" }
+let s:function     = { "fg":  "198", "bg": "NONE" }
+let s:identifier   = { "fg":   "81", "bg": "NONE" }
+let s:keyword      = { "fg":  "255", "bg": "NONE" }
+let s:number       = { "fg":  "220", "bg": "NONE" }
+let s:preproc      = { "fg":  "190", "bg": "NONE" }
+let s:statement    = { "fg":  "255", "bg": "NONE" }
+let s:special      = { "fg":  "214", "bg": "NONE" }
+let s:string       = { "fg":  "228", "bg": "NONE" }
+let s:type         = { "fg":  "177", "bg": "NONE" }
 
-let s:diffadd     = { "fg": "NONE", "bg":  "234" }
-let s:diffchange  = { "fg": "NONE", "bg":  "233" }
-let s:difftext    = { "fg": "NONE", "bg":  "233" }
-let s:diffdelete  = { "fg":   "52", "bg": "NONE" }
+let s:diffadd      = { "fg": "NONE", "bg":  "234" }
+let s:diffchange   = { "fg": "NONE", "bg":  "233" }
+let s:difftext     = { "fg": "NONE", "bg":  "233" }
+let s:diffdelete   = { "fg":   "52", "bg": "NONE" }
 
-let s:cursor      = { "fg":   "00", "bg":   "15" }
-let s:cursorline  = { "fg": "NONE", "bg":  "232" }
-let s:linenr      = { "fg":  "237", "bg":  "232" }
-let s:normal      = { "fg":  "255", "bg":  "233" }
-let s:nontext     = { "fg":  "236", "bg": "NONE" }
-let s:search      = { "fg":   "00", "bg":  "220" }
-let s:tabline     = { "fg":  "245", "bg": "NONE" }
-let s:tablinefill = { "fg":  "245", "bg": "NONE" }
-let s:tablinesel  = { "fg":  "220", "bg": "NONE" }
-let s:visual      = { "fg":   "00", "bg":  "220" }
-let s:warning     = { "fg":  "196", "bg": "NONE" }
+let s:cursor       = { "fg":   "00", "bg":   "15" }
+let s:cursorline   = { "fg": "NONE", "bg":  "232" }
+let s:linenr       = { "fg":  "237", "bg":  "232" }
+let s:cursorlinenr = { "fg":  "231", "bg":  "232" }
+let s:normal       = { "fg":  "255", "bg":  "233" }
+let s:nontext      = { "fg":  "236", "bg": "NONE" }
+let s:search       = { "fg":   "00", "bg":  "220" }
+let s:tabline      = { "fg":  "245", "bg": "NONE" }
+let s:tablinefill  = { "fg":  "245", "bg": "NONE" }
+let s:tablinesel   = { "fg":  "220", "bg": "NONE" }
+let s:visual       = { "fg":   "00", "bg":  "220" }
+let s:warning      = { "fg":  "196", "bg": "NONE" }
 
 function! s:h(group, colors, style)
 	execute "highlight" a:group "guifg=" s:colors[a:colors.fg] "guibg=" s:colors[a:colors.bg] "gui=" a:style "ctermfg=" a:colors.fg "ctermbg=" a:colors.bg "cterm=" a:style
 endfunction
 
 "Syntax highlighting
-call s:h("comment",      s:comment,     "NONE")
-call s:h("constant",     s:constant,    "bold")
-call s:h("cursorline",   s:cursorline,  "NONE")
-call s:h("cursorcolumn", s:cursorline,  "NONE")
-call s:h("function",     s:function,    "NONE")
-call s:h("identifier",   s:identifier,  "NONE")
-call s:h("keyword",      s:keyword,     "bold")
-call s:h("matchparen",   s:search,      "NONE")
-call s:h("number",       s:number,      "NONE")
-call s:h("preproc",      s:preproc,     "NONE")
-call s:h("statement",    s:statement,   "NONE")
-call s:h("special",      s:special,     "NONE")
-call s:h("string",       s:string,      "NONE")
-call s:h("type",         s:type,        "NONE")
+call s:h("comment",      s:comment,      "NONE")
+call s:h("constant",     s:constant,     "bold")
+call s:h("cursorline",   s:cursorline,   "NONE")
+call s:h("cursorcolumn", s:cursorline,   "NONE")
+call s:h("function",     s:function,     "NONE")
+call s:h("identifier",   s:identifier,   "NONE")
+call s:h("keyword",      s:keyword,      "bold")
+call s:h("matchparen",   s:search,       "NONE")
+call s:h("number",       s:number,       "NONE")
+call s:h("preproc",      s:preproc,      "NONE")
+call s:h("statement",    s:statement,    "NONE")
+call s:h("special",      s:special,      "NONE")
+call s:h("string",       s:string,       "NONE")
+call s:h("type",         s:type,         "NONE")
 
 "Diff
-call s:h("diffadd",      s:diffadd,     "NONE")
-call s:h("diffchange",   s:normal,      "NONE")
-call s:h("difftext",     s:normal,      "NONE")
-call s:h("diffdelete",   s:diffdelete,  "NONE")
+call s:h("diffadd",      s:diffadd,      "NONE")
+call s:h("diffchange",   s:normal,       "NONE")
+call s:h("difftext",     s:normal,       "NONE")
+call s:h("diffdelete",   s:diffdelete,   "NONE")
 
 "User interface
-call s:h("tablinefill",  s:tablinefill, "NONE")
-call s:h("cursor",       s:cursor,      "NONE")
-call s:h("foldcolumn",   s:linenr,      "NONE")
-call s:h("folded",       s:linenr,      "NONE")
-call s:h("incsearch",    s:search,      "NONE")
-call s:h("linenr",       s:linenr,      "NONE")
-call s:h("signcolumn",   s:linenr,      "NONE")
-call s:h("nontext",      s:nontext,     "NONE")
-call s:h("normal",       s:normal,      "NONE")
-call s:h("pmenu",        s:tabline,     "NONE")
-call s:h("pmenusel",     s:tablinesel,  "NONE")
-call s:h("search",       s:search,      "NONE")
-call s:h("specialkey",   s:nontext,     "NONE")
-call s:h("statusline",   s:tabline,     "NONE")
-call s:h("statuslinenc", s:tabline,     "italic")
-call s:h("tabline",      s:tabline,     "NONE")
-call s:h("tablinesel",   s:tablinesel,  "NONE")
-call s:h("tablinefill",  s:tablinefill, "NONE")
-call s:h("treeclosable", s:normal,      "NONE")
-call s:h("treedir",      s:constant,    "NONE")
-call s:h("treedirslash", s:normal,      "NONE")
-call s:h("treefile",     s:normal,      "NONE")
-call s:h("treehelp",     s:tabline,     "NONE")
-call s:h("treeopenable", s:type,        "NONE")
-call s:h("treepartfile", s:normal,      "NONE")
-call s:h("treero",       s:normal,      "NONE")
-call s:h("treeup",       s:tabline,     "NONE")
-call s:h("title",        s:normal,      "NONE")
-call s:h("underlined",   s:normal,      "NONE")
-call s:h("vertsplit",    s:nontext,     "NONE")
-call s:h("visual",       s:visual,      "NONE")
-call s:h("visualnos",    s:visual,      "NONE")
-call s:h("warningmsg",   s:warning,     "NONE")
-call s:h("wildmenu",     s:tablinesel,  "NONE")
+call s:h("tablinefill",  s:tablinefill,  "NONE")
+call s:h("cursor",       s:cursor,       "NONE")
+call s:h("foldcolumn",   s:linenr,       "NONE")
+call s:h("folded",       s:linenr,       "NONE")
+call s:h("incsearch",    s:search,       "NONE")
+call s:h("linenr",       s:linenr,       "NONE")
+call s:h("cursorlinenr", s:cursorlinenr, "NONE")
+call s:h("signcolumn",   s:linenr,       "NONE")
+call s:h("nontext",      s:nontext,      "NONE")
+call s:h("normal",       s:normal,       "NONE")
+call s:h("pmenu",        s:tabline,      "NONE")
+call s:h("pmenusel",     s:tablinesel,   "NONE")
+call s:h("search",       s:search,       "NONE")
+call s:h("specialkey",   s:nontext,      "NONE")
+call s:h("statusline",   s:tabline,      "NONE")
+call s:h("statuslinenc", s:tabline,      "italic")
+call s:h("tabline",      s:tabline,      "NONE")
+call s:h("tablinesel",   s:tablinesel,   "NONE")
+call s:h("tablinefill",  s:tablinefill,  "NONE")
+call s:h("treeclosable", s:normal,       "NONE")
+call s:h("treedir",      s:constant,     "NONE")
+call s:h("treedirslash", s:normal,       "NONE")
+call s:h("treefile",     s:normal,       "NONE")
+call s:h("treehelp",     s:tabline,      "NONE")
+call s:h("treeopenable", s:type,         "NONE")
+call s:h("treepartfile", s:normal,       "NONE")
+call s:h("treero",       s:normal,       "NONE")
+call s:h("treeup",       s:tabline,      "NONE")
+call s:h("title",        s:normal,       "NONE")
+call s:h("underlined",   s:normal,       "NONE")
+call s:h("vertsplit",    s:nontext,      "NONE")
+call s:h("visual",       s:visual,       "NONE")
+call s:h("visualnos",    s:visual,       "NONE")
+call s:h("warningmsg",   s:warning,      "NONE")
+call s:h("wildmenu",     s:tablinesel,   "NONE")
