@@ -1,15 +1,29 @@
-set background=dark
-
-hi clear
-
-if exists("syntax_on")
-  syntax reset
-endif
+let colors_name = "alias"
 
 "Set environment to 256 colours
 set t_Co=256
 
-let g:colors_name = "alias"
+if version > 580
+	hi clear
+
+	if exists("syntax_on")
+		syntax reset
+	endif
+endif
+
+if version > 800
+	set termguicolors
+endif
+
+function! s:hi(group, fg, bg, gui)
+	execute "hi " . a:group . 
+		\ " guifg=" . s:colors[a:fg] . 
+		\ " guibg=" . s:colors[a:bg] . 
+		\ " gui=" . a:gui . 
+		\ " ctermfg=" . a:fg . 
+		\ " ctermbg=" . a:bg . 
+		\ " cterm=" . a:gui
+endfunction
 
 let s:colors = {
 	\  "00": "#000000",
@@ -29,7 +43,7 @@ let s:colors = {
 	\  "14": "#00ffff",
 	\  "15": "#ffffff",
 	\  "16": "#000000",
-	\  "17": "#00005f",
+	\  "17": "#00005g",
 	\  "18": "#000087",
 	\  "19": "#0000af",
 	\  "20": "#0000d7",
@@ -271,95 +285,113 @@ let s:colors = {
 	\ "NONE": "NONE"
 	\ }
 
-let s:comment      = { "fg":  "240", "bg": "NONE" }
-let s:constant     = { "fg":  "135", "bg": "NONE" }
-let s:function     = { "fg":  "198", "bg": "NONE" }
-let s:identifier   = { "fg":   "81", "bg": "NONE" }
-let s:keyword      = { "fg":  "255", "bg": "NONE" }
-let s:number       = { "fg":  "220", "bg": "NONE" }
-let s:preproc      = { "fg":  "190", "bg": "NONE" }
-let s:statement    = { "fg":  "255", "bg": "NONE" }
-let s:special      = { "fg":  "214", "bg": "NONE" }
-let s:string       = { "fg":  "228", "bg": "NONE" }
-let s:type         = { "fg":  "177", "bg": "NONE" }
+let s:none = "NONE"
+let s:bold = "bold"
+let s:italic = "italic"
+let s:underline = "underline"
 
-let s:diffadd      = { "fg": "NONE", "bg":  "234" }
-let s:diffchange   = { "fg": "NONE", "bg":  "233" }
-let s:difftext     = { "fg": "NONE", "bg":  "233" }
-let s:diffdelete   = { "fg":   "52", "bg": "NONE" }
+let s:bg_dark = "255"
+let s:bg = "15"
+let s:bg_light = "255"
 
-let s:cursor       = { "fg":   "00", "bg":   "15" }
-let s:cursorline   = { "fg": "NONE", "bg":  "232" }
-let s:linenr       = { "fg":  "237", "bg":  "232" }
-let s:cursorlinenr = { "fg":  "231", "bg":  "232" }
-let s:normal       = { "fg":  "255", "bg":  "233" }
-let s:nontext      = { "fg":  "236", "bg": "NONE" }
-let s:search       = { "fg":   "00", "bg":  "220" }
-let s:tabline      = { "fg":  "245", "bg": "NONE" }
-let s:tablinefill  = { "fg":  "245", "bg": "NONE" }
-let s:tablinesel   = { "fg":  "220", "bg": "NONE" }
-let s:visual       = { "fg":   "00", "bg":  "220" }
-let s:warning      = { "fg":  "196", "bg": "NONE" }
+let s:text = "240"
+let s:text_light = "248"
+let s:warn = "196"
 
-function! s:h(group, colors, style)
-	execute "highlight" a:group "guifg=" s:colors[a:colors.fg] "guibg=" s:colors[a:colors.bg] "gui=" a:style "ctermfg=" a:colors.fg "ctermbg=" a:colors.bg "cterm=" a:style
-endfunction
+let s:colour_1 = "230" " light yellow
+let s:colour_3 = "195" " blue
+let s:colour_4 = "147" " light purple
+let s:colour_5 = "194" " green
+let s:colour_6 = "177" " purple
 
-"Syntax highlighting
-call s:h("comment",      s:comment,      "NONE")
-call s:h("constant",     s:constant,     "bold")
-call s:h("cursorline",   s:cursorline,   "NONE")
-call s:h("cursorcolumn", s:cursorline,   "NONE")
-call s:h("function",     s:function,     "NONE")
-call s:h("identifier",   s:identifier,   "NONE")
-call s:h("keyword",      s:keyword,      "bold")
-call s:h("matchparen",   s:search,       "NONE")
-call s:h("number",       s:number,       "NONE")
-call s:h("preproc",      s:preproc,      "NONE")
-call s:h("statement",    s:statement,    "NONE")
-call s:h("special",      s:special,      "NONE")
-call s:h("string",       s:string,       "NONE")
-call s:h("type",         s:type,         "NONE")
+call s:hi("Comment",				s:text_light,			s:none,				s:italic)
+call s:hi("Constant",				s:colour_6,				s:none,				s:none)
+call s:hi("Function",				s:colour_6,				s:none,				s:none)
+call s:hi("Identifier",			s:none,						s:colour_3,		s:none)
+call s:hi("Keyword",				s:text_light,			s:none,				s:none)
+call s:hi("Number",					s:colour_4,				s:none,				s:none)
+call s:hi("PreProc",				s:none,						s:colour_5,		s:none)
+call s:hi("Statement",			s:text_light,			s:none,				s:none)
+call s:hi("Special",				s:colour_4,			s:none,				s:none)
+call s:hi("String",					s:none,						s:colour_1,		s:none)
+call s:hi("Type",						s:colour_4,				s:none,				s:none)
 
-"Diff
-call s:h("diffadd",      s:diffadd,      "NONE")
-call s:h("diffchange",   s:normal,       "NONE")
-call s:h("difftext",     s:normal,       "NONE")
-call s:h("diffdelete",   s:diffdelete,   "NONE")
+call s:hi("DiffAdd",				s:none,						s:bg_dark,		s:none)
+call s:hi("DiffChange",			s:none,						s:bg,					s:none)
+call s:hi("DiffText",				s:none,						s:bg,					s:none)
+call s:hi("DiffDelete",			s:warn,						s:none,				s:none)
 
-"User interface
-call s:h("tablinefill",  s:tablinefill,  "NONE")
-call s:h("cursor",       s:cursor,       "NONE")
-call s:h("foldcolumn",   s:linenr,       "NONE")
-call s:h("folded",       s:linenr,       "NONE")
-call s:h("incsearch",    s:search,       "NONE")
-call s:h("linenr",       s:linenr,       "NONE")
-call s:h("cursorlinenr", s:cursorlinenr, "NONE")
-call s:h("signcolumn",   s:linenr,       "NONE")
-call s:h("nontext",      s:nontext,      "NONE")
-call s:h("normal",       s:normal,       "NONE")
-call s:h("pmenu",        s:tabline,      "NONE")
-call s:h("pmenusel",     s:tablinesel,   "NONE")
-call s:h("search",       s:search,       "NONE")
-call s:h("specialkey",   s:nontext,      "NONE")
-call s:h("statusline",   s:tabline,      "NONE")
-call s:h("statuslinenc", s:tabline,      "italic")
-call s:h("tabline",      s:tabline,      "NONE")
-call s:h("tablinesel",   s:tablinesel,   "NONE")
-call s:h("tablinefill",  s:tablinefill,  "NONE")
-call s:h("treeclosable", s:normal,       "NONE")
-call s:h("treedir",      s:constant,     "NONE")
-call s:h("treedirslash", s:normal,       "NONE")
-call s:h("treefile",     s:normal,       "NONE")
-call s:h("treehelp",     s:tabline,      "NONE")
-call s:h("treeopenable", s:type,         "NONE")
-call s:h("treepartfile", s:normal,       "NONE")
-call s:h("treero",       s:normal,       "NONE")
-call s:h("treeup",       s:tabline,      "NONE")
-call s:h("title",        s:normal,       "NONE")
-call s:h("underlined",   s:normal,       "NONE")
-call s:h("vertsplit",    s:nontext,      "NONE")
-call s:h("visual",       s:visual,       "NONE")
-call s:h("visualnos",    s:visual,       "NONE")
-call s:h("warningmsg",   s:warning,      "NONE")
-call s:h("wildmenu",     s:tablinesel,   "NONE")
+call s:hi("Cursor",					s:bg,							s:text,				s:none)
+call s:hi("MatchParen",			s:bg,							s:text_light,	s:none)
+call s:hi("Linenr",					s:text_light,			s:bg_dark,		s:none)
+call s:hi("Normal",					s:text,						s:bg,					s:none)
+call s:hi("Nontext",				s:bg_dark,				s:none,				s:none)
+call s:hi("Search",					s:bg,							s:text,				s:none)
+call s:hi("Statusline",			s:text_light,			s:bg_dark,		s:none)
+call s:hi("Tabline",				s:text_light,			s:bg_dark,		s:none)
+call s:hi("TablineFill",		s:text_light,			s:bg_dark,		s:none)
+call s:hi("TablineSel",			s:text,						s:bg_dark,		s:none)
+call s:hi("SignColumn",			s:text_light,			s:bg_dark,		s:none)
+call s:hi("Visual",					s:bg,							s:text,				s:none)
+call s:hi("Warning",				s:warn,						s:bg_dark,		s:none)
+call s:hi("HtmlBold",				s:none,						s:none,				s:bold)
+call s:hi("HtmlLink",				s:none,						s:none,				s:underline)
+
+hi! link JavaScriptBraces					Special
+hi! link JavaScriptParens					JavaScriptBraces
+hi! link JavaScriptNumber					Number
+hi! link JavaScriptBoolean				Number
+hi! link JavaScriptNull						Number
+hi! link JavaScriptGlobal					JavaScriptIdentifier
+hi! link JavaScriptFunction				PreProc
+hi! link JavaScriptReserved				PreProc
+hi! link JavaScriptConditional		PreProc
+hi! link JavaScriptRepeat					PreProc
+hi! link JavaScriptException			PreProc
+hi! link JavaScriptStatement			PreProc
+hi! link JavaScriptMessage				Normal
+hi! link JavaScriptOperator				Special
+hi! link JavaScriptLabel					Special
+hi! link JsonKeyword							Function
+hi! link JsonBraces								JavaScriptBraces
+hi! link JsonParens								JavaScriptParens	
+hi! link JsonNumber								JavaScriptNumber
+hi! link JsonBoolean							JavaScriptBoolean
+hi! link JsonNull									JavaScriptNull
+hi! link HtmlHead									Normal
+hi! link HtmlTitle								Normal
+hi! link HtmlTagName							Function
+hi! link HtmlSpecialTagName				HtmlTagName
+hi! link HtmlEndTag								HtmlTag
+hi! link HtmlH1										HtmlBold
+hi! link HtmlH2										HtmlH1
+hi! link HtmlH3										HtmlH1
+hi! link HtmlH4										HtmlH1
+hi! link HtmlH5										HtmlH1
+hi! link HtmlH6										HtmlH1
+hi! link XmlEndTag								XmlTag
+hi! link PhpClasses								Normal
+hi! link PhpMethods								Normal
+hi! link PhpMethodsVar						PhpMethods
+hi! link PhpStatement							PreProc
+hi! link PhpConditional						PreProc
+hi! link PhpRepeat								PreProc
+hi! link PhpException							PreProc
+hi! link PhpBoolean								Number
+hi! link PhpSpecialFunction				PhpFunctions
+hi! link PhpOperator							Special
+hi! link PhpVarSelector						Special
+hi! link PhpRelation							Special
+hi! link PhpComparison						Special
+hi! link PhpType									Number
+hi! link SpellBad									Warning
+hi! link SpellCap									Warning
+hi! link Error										Warning
+hi! link CssTagName								Identifier
+hi! link CssStyle									Type
+hi! link CssAttrRegion						Function
+hi! link CssColor									CssAttrRegion
+hi! link CssUnitDecorators				CssAttrRegion
+hi! link CssValueLength						CssAttrRegion
+hi! link CssValueNumber						CssAttrRegion
+hi! link CssBraces								JavaScriptBraces
