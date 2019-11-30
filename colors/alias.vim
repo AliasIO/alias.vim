@@ -1,3 +1,7 @@
+set background=dark
+
+highlight clear
+
 let colors_name = "alias"
 
 "Set environment to 256 colours
@@ -290,54 +294,61 @@ let s:bold = "bold"
 let s:italic = "italic"
 let s:underline = "underline"
 
-let s:bg_dark = "255"
-let s:bg = "15"
-let s:bg_light = "255"
+let s:bg_dark = "232"
+let s:bg = "234"
+let s:bg_light = "235"
 
-let s:text = "240"
-let s:text_light = "248"
+let s:text_dark = "240"
+let s:text = "254"
+let s:text_light = "15"
 let s:warn = "196"
 
-let s:colour_1 = "230" " light yellow
-let s:colour_3 = "195" " blue
+let s:colour_1 = "229" " yellow
+let s:colour_2 = "229" " yellow
+let s:colour_3 = "197" " hot pink
 let s:colour_4 = "147" " light purple
-let s:colour_5 = "194" " green
-let s:colour_6 = "177" " purple
+let s:colour_5 = "214" " orange
+let s:colour_6 = "190" " green
 
-call s:hi("Comment",				s:text_light,			s:none,				s:italic)
-call s:hi("Constant",				s:colour_6,				s:none,				s:none)
-call s:hi("Function",				s:colour_6,				s:none,				s:none)
-call s:hi("Identifier",			s:none,						s:colour_3,		s:none)
-call s:hi("Keyword",				s:text_light,			s:none,				s:none)
-call s:hi("Number",					s:colour_4,				s:none,				s:none)
-call s:hi("PreProc",				s:none,						s:colour_5,		s:none)
-call s:hi("Statement",			s:text_light,			s:none,				s:none)
-call s:hi("Special",				s:colour_4,			s:none,				s:none)
-call s:hi("String",					s:none,						s:colour_1,		s:none)
-call s:hi("Type",						s:colour_4,				s:none,				s:none)
+call s:hi("Comment",					s:text_dark,			s:none,				s:italic)
+call s:hi("Constant",					s:colour_6,				s:none,				s:none)
+call s:hi("Function",					s:colour_6,				s:none,				s:none)
+call s:hi("Identifier",				s:colour_3,				s:none,				s:bold)
+call s:hi("Keyword",					s:text_light,			s:none,				s:none)
+call s:hi("Number",						s:colour_4,				s:none,				s:none)
+call s:hi("PreProc",					s:colour_3,				s:none,				s:bold)
+call s:hi("Statement",				s:text_light,			s:none,				s:none)
+call s:hi("Special",					s:colour_4,				s:none,				s:none)
+call s:hi("JavaScriptBraces",	s:colour_5,			s:none,				s:none)
+call s:hi("String",						s:colour_1,				s:none,				s:none)
+call s:hi("Type",							s:colour_4,				s:none,				s:none)
 
-call s:hi("DiffAdd",				s:none,						s:bg_dark,		s:none)
-call s:hi("DiffChange",			s:none,						s:bg,					s:none)
-call s:hi("DiffText",				s:none,						s:bg,					s:none)
-call s:hi("DiffDelete",			s:warn,						s:none,				s:none)
+call s:hi("DiffAdd",					s:none,						s:bg_dark,		s:none)
+call s:hi("DiffChange",				s:none,						s:bg,					s:none)
+call s:hi("DiffText",					s:none,						s:bg,					s:none)
+call s:hi("DiffDelete",				s:warn,						s:none,				s:none)
 
-call s:hi("Cursor",					s:bg,							s:text,				s:none)
-call s:hi("MatchParen",			s:bg,							s:text_light,	s:none)
-call s:hi("Linenr",					s:text_light,			s:bg_dark,		s:none)
-call s:hi("Normal",					s:text,						s:bg,					s:none)
-call s:hi("Nontext",				s:bg_dark,				s:none,				s:none)
-call s:hi("Search",					s:bg,							s:text,				s:none)
-call s:hi("Statusline",			s:text_light,			s:bg_dark,		s:none)
-call s:hi("Tabline",				s:text_light,			s:bg_dark,		s:none)
-call s:hi("TablineFill",		s:text_light,			s:bg_dark,		s:none)
-call s:hi("TablineSel",			s:text,						s:bg_dark,		s:none)
-call s:hi("SignColumn",			s:text_light,			s:bg_dark,		s:none)
-call s:hi("Visual",					s:bg,							s:text,				s:none)
-call s:hi("Warning",				s:warn,						s:bg_dark,		s:none)
-call s:hi("HtmlBold",				s:none,						s:none,				s:bold)
-call s:hi("HtmlLink",				s:none,						s:none,				s:underline)
+call s:hi("Cursor",						s:bg,							s:text,				s:none)
+call s:hi("CursorLine",				s:none,						s:bg_light,		s:none)
+call s:hi("CursorLinenr",			s:colour_1,				s:bg_light,		s:none)
+call s:hi("MatchParen",				s:bg,							s:colour_5,		s:none)
+call s:hi("Linenr",						s:text_dark,			s:bg_dark,		s:none)
+call s:hi("Normal",						s:text,						s:bg,					s:none)
+call s:hi("Nontext",					s:text_dark,			s:none,				s:none)
+call s:hi("Search",						s:bg,							s:colour_1,		s:none)
+call s:hi("Statusline",				s:text_light,			s:bg_dark,		s:none)
+call s:hi("Tabline",					s:text_light,			s:bg_dark,		s:none)
+call s:hi("TablineFill",			s:text_light,			s:bg_dark,		s:none)
+call s:hi("TablineSel",				s:colour_1,				s:bg_dark,		s:none)
+call s:hi("SignColumn",				s:text_light,			s:bg_dark,		s:none)
+call s:hi("Visual",						s:bg,							s:text,				s:none)
+call s:hi("Warning",					s:warn,						s:bg_dark,		s:none)
+call s:hi("HtmlBold",					s:none,						s:none,				s:bold)
+call s:hi("HtmlLink",					s:none,						s:none,				s:underline)
+call s:hi("Pmenu",						s:colour_1,				s:bg_light,		s:none)
+call s:hi("PmenuSel",					s:bg_light,				s:colour_1,		s:none)
 
-hi! link JavaScriptBraces					Special
+hi! link Directory								Special
 hi! link JavaScriptParens					JavaScriptBraces
 hi! link JavaScriptNumber					Number
 hi! link JavaScriptBoolean				Number
